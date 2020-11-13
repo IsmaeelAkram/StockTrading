@@ -21,7 +21,6 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 browser = webdriver.Chrome(options=chrome_options)
 
-
 # Get active stocks
 stocks = get_active_stocks(browser)
 
