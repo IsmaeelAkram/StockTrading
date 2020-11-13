@@ -2,7 +2,7 @@ from stock import Stock
 import chalk
 
 def get_active_stocks(browser):
-    print(chalk.green("Getting new active stocks..."))
+    print(chalk.green("Getting active stocks..."))
     browser.get("https://finance.yahoo.com/most-active")
     active_stocks_symbols = browser.find_elements_by_xpath('//*[@id="scr-res-table"]/div[1]/table/tbody/tr/td[1]/a')
     active_stocks_names = browser.find_elements_by_xpath('/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[6]/div/div/section/div/div[2]/div[1]/table/tbody/tr/td[2]')
