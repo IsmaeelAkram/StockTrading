@@ -1,0 +1,3 @@
+- Add option to listen for current stocks you already have
+- Check price every 30 seconds/1 minute to look at price changes.
+- Sell if stock is about to go down but still above previous price.
