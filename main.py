@@ -3,7 +3,6 @@ load_dotenv()
 import robin_stocks as robinhood
 import os
 import sys
-import yahoo_finance
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -32,7 +31,6 @@ print(chalk.green("Cheapest stock is: ") + f"{cheapest_stock.symbol} ({cheapest_
 # Check if you already own cheapest stock
 current_stocks = get_stocks()
 stock_found = False
-print(current_stocks)
 for stock in current_stocks:
     # [(symbol, name, shares, initial_price)]
     if(stock[0] == cheapest_stock.symbol):
@@ -45,11 +43,13 @@ while True:
     print(chalk.blue("Checking stocks again..."))
     for stock in get_stocks():
         # [(symbol, name, shares, initial_price)]
-        share = yahoo_finance.Share(stock[0])
-        new_price = share.get_price()
+        
+        browser.get(f'https://finance.yahoo.com/quote/{stock[0]}')
+        new_price = float(browser.find_element_by_xpath('/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[3]/div[1]/div/span[1]').text)
+
         if(stock[3] > new_price):
-            print(chalk.green(f"{stock.symbol} stock price has gone up! Selling to earn {new_price - stock[3]}..."))
+            print(chalk.green(f"{stock[0]} stock price has gone up! Selling to earn {new_price - stock[3]}..."))
             sell_stock(stock[0], stock[2], stock[2])
         else:
-            print(chalk.blue(f"{stock.symbol} price has either gone down or is the same. Ignoring..."))
+            print(chalk.blue(f"{stock[0]} price has either gone down or is the same. Ignoring..."))
     time.sleep(60)
