@@ -35,7 +35,7 @@ stock_found = False
 print(current_stocks)
 for stock in current_stocks:
     # [(symbol, name, shares, initial_price)]
-    if(stock[0] is cheapest_stock.symbol):
+    if(stock[0] == cheapest_stock.symbol):
         stock_found = True
 if not stock_found:
     buy_stock(cheapest_stock, 4)
