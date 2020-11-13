@@ -1,5 +1,6 @@
 from stock import Stock
 import chalk
+import sys
 
 def get_active_stocks(browser):
     print(chalk.green("Getting active stocks..."))
@@ -15,3 +16,20 @@ def get_active_stocks(browser):
         price = float(active_stocks_dict[stock][1].text)
         active_stocks.append(Stock(symbol, name, price))
     return active_stocks
+
+def get_cheapest_stock(stocks):
+    print(chalk.green("Getting cheapest of active stocks..."))
+    stock_prices = []
+    for stock in stocks:
+        stock_prices.append(stock.price)
+    min_stock_price = min(stock_prices)
+
+    cheapest_stock = None
+    for stock in stocks:
+        if(min_stock_price is stock.price):
+            cheapest_stock = stock
+    if(cheapest_stock is None):
+        print(chalk.red("Could not find cheapest of active stocks!"))
+        sys.exit(1)
+    else:
+        return cheapest_stock
