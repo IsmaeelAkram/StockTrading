@@ -1,2 +1,3 @@
 robin_stocks
 yahoo-finance
+python-dotenv
